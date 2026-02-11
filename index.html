@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tianyu Hou | Academic Portfolio</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 语言切换按钮 */
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .lang-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .lang-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* 全局样式 */
+        body {
+            background-color: #f8f9fa;
+            color: #2d3436;
+            line-height: 1.7;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航 */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header .title-sub {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 个人资料部分 */
+        .profile {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+            align-items: center;
+        }
+
+        .profile-img {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .profile-img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .profile-info {
+            flex: 2;
+            min-width: 250px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .profile-info h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .profile-info p {
+            margin: 0.8rem 0;
+            font-size: 1.05rem;
+        }
+
+        .profile-info .contact-link {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .profile-info .contact-link:hover {
+            color: #2980b9;
+        }
+
+        /* 学术板块通用样式 */
+        .academic-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin: 2rem 0;
+        }
+
+        .academic-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .academic-section .entry {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid #3498db;
+        }
+
+        .academic-section .entry-header {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .academic-section .entry-details {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .academic-section .entry-details em {
+            color: #666;
+        }
+
+        /* 研究成果特殊样式 */
+        .publications .publication-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .publications .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .publications .doi-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .publications .doi-link:hover {
+            text-decoration: underline;
+        }
+
+        .publications .journal-info {
+            font-style: italic;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* 中文内容样式 */
+        .chinese-text {
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .academic-section .entry-header {
+                flex-direction: column;
+            }
+
+            .academic-section .entry-header .date {
+                margin-top: 0.3rem;
+                font-size: 0.9rem;
+            }
+
+            .language-switch {
+                top: 10px;
+                right: 10px;
+            }
+
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 隐藏中文模块（初始英文显示） */
+        .cn-content {
+            display: none;
+        }
+
+        .en-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 语言切换按钮 -->
+    <div class="language-switch">
+        <button id="langToggle" class="lang-btn">Chinese</button>
+    </div>
+
+    <!-- 头部（英文） -->
+    <header class="en-content">
+        <div class="container">
+            <h1>Tianyu Hou</h1>
+            <div class="title-sub">Tenure-track Associate Professor (特聘副教授)</div>
+            <p>University of Science and Technology of China</p>
+        </div>
+    </header>
+
+    <!-- 头部（中文） -->
+    <header class="cn-content">
+        <div class="container">
+            <h1 class="chinese-text">侯天雨</h1>
+            <div class="title-sub chinese-text">特聘副教授</div>
+            <p class="chinese-text">中国科学技术大学</p>
+        </div>
+    </header>
+
+    <!-- 主体内容（英文） -->
+    <main class="container en-content">
+        <!-- 个人资料 -->
+        <section class="profile">
+            <div class="profile-img">
+                <!-- 替换为你的头像链接 -->
+                <img src="https://raw.githubusercontent.com/hou-tianyu/my-photos/main/profile.jpg" alt="Tianyu Hou Profile Picture">
+            </div>
+            <div class="profile-info">
+                <h2>About Me</h2>
+                <!-- 修正typo + 精炼内容 -->
+                <p>Tianyu Hou holds dual Ph.D. degrees in Marketing (City University of Hong Kong) and Management Science (Xi'an Jiaotong University). Currently a Tenure-track Associate Professor at the University of Science and Technology of China, his research has been published in leading journals including Technological Forecasting & Social Change, IEEE Transactions on Engineering Management, and Management Decision. His research focuses on knowledge creation, technological innovation, and digital transformation.</p>
+                <p><strong>Location:</strong> Hefei, Anhui</p>
+                <p><strong>Email:</strong> <a href="mailto:houty@ustc.edu.cn" class="contact-link">houty@ustc.edu.cn</a></p>
+            </div>
+        </section>
+
+        <!-- 教育背景（更新后的英文版本） -->
+        <section class="academic-section education">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Ph.D. in Marketing (Joint Program) (香港城市大学，市场营销，博士)</span>
+                    <span class="date">9/2018 – 8/2022</span>
+                </div>
+                <div class="entry-details">
+                    City University of Hong Kong
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Ph.D. in Management Science and Engineering (西安交通大学，管理科学与工程，博士)</span>
+                    <span class="date">9/2017 – 7/2022</span>
+                </div>
+                <div class="entry-details">
+                    Xi'an Jiaotong University
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Postgraduate (西安交通大学，长学制研究生)</span>
+                    <span class="date">9/2016 – 7/2017</span>
+                </div>
+                <div class="entry-details">
+                    Xi'an Jiaotong University
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Exchange Student (Keimyung University，韩国启明大学，交换生)</span>
+                    <span class="date">8/2014 – 1/2015</span>
+                </div>
+                <div class="entry-details">
+                    Keimyung University, Korea
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>B.A. (兰州大学，本科)</span>
+                    <span class="date">9/2012 – 6/2016</span>
+                </div>
+                <div class="entry-details">
+                    Lanzhou University
+                </div>
+            </div>
+        </section>
+
+        <!-- 研究方向 -->
+        <section class="academic-section research-interests">
+            <h2><i class="fas fa-lightbulb"></i> Research Interests</h2>
+            <div class="entry-details">
+                <ul style="list-style: disc; padding-left: 2rem;">
+                    <li>Digital transformation and innovation</li>
+                    <li>Data-driven decision making</li>
+                    <li>AI diffusion (Industrial diffusion of artificial intelligence technologies)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 工作经历（更新后的英文版本） -->
+        <section class="academic-section work-experience">
+            <h2><i class="fas fa-briefcase"></i> Working Experience</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Tenure-Track Associate Professor (中科大，特任副教授)</span>
+                    <span class="date">10/2024 – Present</span>
+                </div>
+                <div class="entry-details">
+                    University of Science and Technology of China
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Post-doctoral Fellow (With Prof. Yubo Chen) （清华大学，博士后）</span>
+                    <span class="date">9/2022 – 9/2024</span>
+                </div>
+                <div class="entry-details">
+                    Tsinghua University
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Research Assistant (With Prof. Julie Juan Li) （香港城市大学，研究助理）</span>
+                    <span class="date">9/2021 – 7/2022</span>
+                </div>
+                <div class="entry-details">
+                    City University of Hong Kong
+                </div>
+            </div>
+        </section>
+
+        <!-- 奖项和基金 -->
+        <section class="academic-section awards-funding">
+            <h2><i class="fas fa-award"></i> Awards and Funding</h2>
+            <div class="entry-details">
+                <ul style="list-style: disc; padding-left: 2rem;">
+                    <li>Outstanding Research Thesis Award (3000HKD), City University of Hong Kong</li>
+                    <li>China Postdoctoral Science Foundation General Program (Number: 2023M731901), PI, 2023-2024</li>
+                    <li>National Natural Science Foundation of China Youth Program (Class C), PI, 2026-2028</li>
+                    <li>Fundamental Research Funds for the Central Universities - Youth Innovation Fund, PI, 2026-2027</li>
+                    <li>National Natural Science Foundation of China General Program, Co-Investigator (1/5), 2026-2029</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 研究成果 -->
+        <section class="academic-section publications">
+            <h2><i class="fas fa-book"></i> Research Outputs</h2>
+            
+            <div class="publication-item">
+                <p>Tianyu Hou, Liang Zhang, Julie Juan Li, Bin Chong, Yanzi Wu. 2024. The Quest for Valuable Inventions: Knowledge Search and the Value of Patented Inventions. <span class="journal-info">Technological Forecasting & Social Change. Vol. 209. Online.</span></p>
+                <a href="https://doi.org/10.1016/j.techfore.2024.123794" class="doi-link" target="_blank">https://doi.org/10.1016/j.techfore.2024.123794</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Tianyu Hou, Julie Juan Li, and Jun Lin. 2021. Recombination of Knowledge Components and Knowledge Impact: Neighboring Components Versus Distant Components. <span class="journal-info">IEEE Transactions on Engineering Management, Vol. 71, pp. 245-257.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2021.3119437" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2021.3119437</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Tianyu Hou, Julie Juan Li, Jun Lin. 2022. Neighboring Knowledge Recombination: Knowledge Relationship Intensity, Neighboring Knowledge Concentration, and Knowledge Impact. <span class="journal-info">IEEE Transactions on Engineering Management, Vol.71, pp. 5160-5173.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2022.3212793" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2022.3212793</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Tianyu Hou, Yue Fang, Julie Juan Li, Jun Lin, and Qin SU. 2023. Building Organizational Resilience: The Role of Supply Chain Board Members and in Supply Network Positions. <span class="journal-info">IEEE Transactions on Engineering Management. Vol.71, pp. 6929-6949.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2023.3287836" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2023.3287836</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Tianyu Hou*, Julie Juan Li. 2024. Conceptual Underpinnings: Theory Selection in Strategic Management Research. <span class="journal-info">Management Decision, Vol. 62(12), pp. 3761-3781.</span></p>
+                <a href="https://doi.org/10.1108/MD-08-2023-1423" class="doi-link" target="_blank">https://doi.org/10.1108/MD-08-2023-1423</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Tianyu Hou, Wei Wang, Jin Chen, Haijie Wang. 2025. R&D Area Diversity and Innovation Quality: A Cross-functional Absorptive Capacity Perspective. <span class="journal-info">International Journal of Technology Management. Vol. 97(4), pp. 464-499.</span></p>
+                <a href="https://doi.org/10.1504/IJTM.2023.10062974" class="doi-link" target="_blank">https://doi.org/10.1504/IJTM.2023.10062974</a>
+            </div>
+
+            <div class="publication-item chinese-text">
+                <p>张樑，任叶瑶，侯天雨*，丰豪放. 企业捐赠解耦对企业捐赠调整的影响:管理者社会比较的调节作用[J]. 系统工程理论与实践. 2024. (Online)</p>
+            </div>
+
+            <div class="publication-item chinese-text">
+                <p>王巍，李德鸿，侯天雨，陈劲. 多重网络视角下突破性技术创新的研究述评与展望[J]. 科学学与科学技术管理，2022, 43 (10) :83-102.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 主体内容（中文） -->
+    <main class="container cn-content">
+        <!-- 个人资料 -->
+        <section class="profile">
+            <div class="profile-img">
+                <img src="https://raw.githubusercontent.com/hou-tianyu/my-photos/main/profile.jpg" alt="侯天雨 个人照片">
+            </div>
+            <div class="profile-info chinese-text">
+                <h2>关于我</h2>
+                <!-- 同步精炼后的中文版本 -->
+                <p>侯天雨博士拥有香港城市大学市场营销博士、西安交通大学管理科学博士双学位，现任中国科学技术大学特任副教授。研究成果发表于Technological Forecasting & Social Change、IEEE Transactions on Engineering Management、Management Decision等国际核心期刊，主要研究方向为知识创造、技术创新与数字化转型。</p>
+                <p><strong>所在地:</strong> 安徽合肥</p>
+                <p><strong>邮箱:</strong> <a href="mailto:houty@ustc.edu.cn" class="contact-link">houty@ustc.edu.cn</a></p>
+            </div>
+        </section>
+
+        <!-- 教育背景（更新后的中文版本） -->
+        <section class="academic-section education chinese-text">
+            <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>市场营销博士（联合培养）</span>
+                    <span class="date">2018.09 – 2022.08</span>
+                </div>
+                <div class="entry-details">
+                    香港城市大学
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>管理科学与工程博士</span>
+                    <span class="date">2017.09 – 2022.07</span>
+                </div>
+                <div class="entry-details">
+                    西安交通大学
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>长学制研究生</span>
+                    <span class="date">2016.09 – 2017.07</span>
+                </div>
+                <div class="entry-details">
+                    西安交通大学
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>交换生</span>
+                    <span class="date">2014.08 – 2015.01</span>
+                </div>
+                <div class="entry-details">
+                    韩国启明大学
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>本科</span>
+                    <span class="date">2012.09 – 2016.06</span>
+                </div>
+                <div class="entry-details">
+                    兰州大学
+                </div>
+            </div>
+        </section>
+
+        <!-- 研究方向 -->
+        <section class="academic-section research-interests chinese-text">
+            <h2><i class="fas fa-lightbulb"></i> 研究方向</h2>
+            <div class="entry-details">
+                <ul style="list-style: disc; padding-left: 2rem;">
+                    <li>数字化转型与创新</li>
+                    <li>数据驱动的管理决策</li>
+                    <li>人工智能技术的产业扩散</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 工作经历（更新后的中文版本） -->
+        <section class="academic-section work-experience chinese-text">
+            <h2><i class="fas fa-briefcase"></i> 工作经历</h2>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>特任副教授</span>
+                    <span class="date">2024.10 – 至今</span>
+                </div>
+                <div class="entry-details">
+                    中国科学技术大学
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>博士后</span>
+                    <span class="date">2022.09 – 2024.09</span>
+                </div>
+                <div class="entry-details">
+                    清华大学 <br>
+                    <em>合作导师：陈煜波教授</em>
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>研究助理</span>
+                    <span class="date">2021.09 – 2022.07</span>
+                </div>
+                <div class="entry-details">
+                    香港城市大学 <br>
+                    <em>合作导师：Julie Juan Li 教授</em>
+                </div>
+            </div>
+        </section>
+
+        <!-- 奖项和基金 -->
+        <section class="academic-section awards-funding chinese-text">
+            <h2><i class="fas fa-award"></i> 奖项与基金</h2>
+            <div class="entry-details">
+                <ul style="list-style: disc; padding-left: 2rem;">
+                    <li>杰出研究论文奖（3000港币），香港城市大学</li>
+                    <li>中国博士后科学基金面上项目 (编号: 2023M731901)，主持，2023-2024</li>
+                    <li>国家自然科学基金青年项目（C类），主持，2026-2028</li>
+                    <li>中央高校基本科研业务费校青年创新基金项目，主持，2026-2027</li>
+                    <li>国家自然科学基金面上项目，参与（1/5），2026-2029</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 研究成果 -->
+        <section class="academic-section publications chinese-text">
+            <h2><i class="fas fa-book"></i> 研究成果</h2>
+            
+            <div class="publication-item">
+                <p>Hou TY, Zhang L, Li JJ, Chong B, Wu YZ. 2024. The Quest for Valuable Inventions: Knowledge Search and the Value of Patented Inventions. <span class="journal-info">Technological Forecasting & Social Change. Vol. 209. Online.</span></p>
+                <a href="https://doi.org/10.1016/j.techfore.2024.123794" class="doi-link" target="_blank">https://doi.org/10.1016/j.techfore.2024.123794</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Hou TY, Li JJ, Lin J. 2021. Recombination of Knowledge Components and Knowledge Impact: Neighboring Components Versus Distant Components. <span class="journal-info">IEEE Transactions on Engineering Management, Vol. 71, pp. 245-257.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2021.3119437" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2021.3119437</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Hou TY, Li JJ, Lin J. 2022. Neighboring Knowledge Recombination: Knowledge Relationship Intensity, Neighboring Knowledge Concentration, and Knowledge Impact. <span class="journal-info">IEEE Transactions on Engineering Management, Vol.71, pp. 5160-5173.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2022.3212793" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2022.3212793</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Hou TY, Fang Y, Li JJ, Lin J, SU Q. 2023. Building Organizational Resilience: The Role of Supply Chain Board Members and in Supply Network Positions. <span class="journal-info">IEEE Transactions on Engineering Management. Vol.71, pp. 6929-6949.</span></p>
+                <a href="https://doi.org/10.1109/TEM.2023.3287836" class="doi-link" target="_blank">https://doi.org/10.1109/TEM.2023.3287836</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Hou TY*, Li JJ. 2024. Conceptual Underpinnings: Theory Selection in Strategic Management Research. <span class="journal-info">Management Decision, Vol. 62(12), pp. 3761-3781.</span></p>
+                <a href="https://doi.org/10.1108/MD-08-2023-1423" class="doi-link" target="_blank">https://doi.org/10.1108/MD-08-2023-1423</a>
+            </div>
+
+            <div class="publication-item">
+                <p>Hou TY, Wang W, Chen J, Wang HJ. 2025. R&D Area Diversity and Innovation Quality: A Cross-functional Absorptive Capacity Perspective. <span class="journal-info">International Journal of Technology Management. Vol. 97(4), pp. 464-499.</span></p>
+                <a href="https://doi.org/10.1504/IJTM.2023.10062974" class="doi-link" target="_blank">https://doi.org/10.1504/IJTM.2023.10062974</a>
+            </div>
+
+            <div class="publication-item">
+                <p>张樑，任叶瑶，侯天雨*，丰豪放. 企业捐赠解耦对企业捐赠调整的影响:管理者社会比较的调节作用[J]. 系统工程理论与实践. 2024. (Online)</p>
+            </div>
+
+            <div class="publication-item">
+                <p>王巍，李德鸿，侯天雨，陈劲. 多重网络视角下突破性技术创新的研究述评与展望[J]. 科学学与科学技术管理，2022, 43 (10) :83-102.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚（英文） -->
+    <footer class="en-content">
+        <div class="container">
+            <p>&copy; 2026 Tianyu Hou | All Rights Reserved</p>
+            <div class="social-links">
+                <a href="https://github.com/houtianyu" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/houtianyu" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://researchgate.net/profile/Tianyu-Hou" target="_blank"><i class="fab fa-researchgate"></i></a>
+                <a href="https://orcid.org/0000-0000-0000-0000" target="_blank"><i class="fab fa-orcid"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 页脚（中文） -->
+    <footer class="cn-content chinese-text">
+        <div class="container">
+            <p>&copy; 2026 侯天雨 | 保留所有权利</p>
+            <div class="social-links">
+                <a href="https://github.com/houtianyu" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/houtianyu" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://researchgate.net/profile/Tianyu-Hou" target="_blank"><i class="fab fa-researchgate"></i></a>
+                <a href="https://orcid.org/0000-0000-0000-0000" target="_blank"><i class="fab fa-orcid"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        // 页面加载完成提示
+        window.addEventListener('load', function() {
+            console.log('Academic Portfolio Loaded Successfully!');
+        });
+
+        // 语言切换功能
+        const langToggle = document.getElementById('langToggle');
+        const enContents = document.querySelectorAll('.en-content');
+        const cnContents = document.querySelectorAll('.cn-content');
+        
+        let isEnglish = true;
+        
+        langToggle.addEventListener('click', function() {
+            if (isEnglish) {
+                // 切换到中文
+                enContents.forEach(el => el.style.display = 'none');
+                cnContents.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'English';
+                document.documentElement.lang = 'zh-CN';
+            } else {
+                // 切换到英文
+                cnContents.forEach(el => el.style.display = 'none');
+                enContents.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'Chinese';
+                document.documentElement.lang = 'en';
+            }
+            isEnglish = !isEnglish;
+        });
+
+        // 平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
